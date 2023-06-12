@@ -21,6 +21,8 @@ public record DatosRegistroMedico(@NotBlank String nombre,
                                   @Email // valida que sea un email
                                   String email,
                                   @NotBlank
+                                  String telefono,
+                                  @NotBlank
                                   @Pattern(regexp = "\\d{4,6}") //expresion regular para que tenga de 4 a 6 caracteres
                                   String documento,
                                   @NotNull
