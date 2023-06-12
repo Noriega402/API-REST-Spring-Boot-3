@@ -4,10 +4,21 @@
  */
 package med.voll.api.direccion;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 /**
  *
  * @author Daniel Noriega
  */
-public record DatosDireccion(String calle, String distrito, String ciudad, String numero, String complemento) {
+public record DatosDireccion(
+        @NotBlank
+        String calle,
+        @NotBlank
+        String distrito,
+        @NotBlank
+        String ciudad,
+        String numero,
+        String complemento) {
 
 }
