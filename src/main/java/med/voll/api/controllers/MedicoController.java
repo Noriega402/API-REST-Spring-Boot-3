@@ -42,7 +42,8 @@ public class MedicoController {
     //Mostrar listado con paginacion
     @GetMapping
     public Page<DatosListadoMedico> listadoMedicos(@PageableDefault(size = 2) Pageable paginacion){
-        return medicoRepository.findAll(paginacion).map(DatosListadoMedico::new);
+        //return medicoRepository.findAll(paginacion).map(DatosListadoMedico::new);
+        return medicoRepository.findByActivoTrue(paginacion).map(DatosListadoMedico::new);
     }
 
     //@PageableDefault(size = 2) dar un valor por defecto de cuantos items se muestran por paginacion
@@ -52,5 +53,19 @@ public class MedicoController {
     public void actualizarMedico(@RequestBody @Valid DatosActualizarMedico datosActualizarMedico) {
         Medico medico = medicoRepository.getReferenceById(datosActualizarMedico.id());
         medico.actualizarDatos(datosActualizarMedico);
+    }
+
+//    @DeleteMapping("/{id}")
+//    @Transactional
+//    public void eliminarMedico(@PathVariable Long id){
+//        Medico medico = medicoRepository.getReferenceById(id);
+//        medicoRepository.delete(medico);
+//    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void eliminarMedico(@PathVariable Long id){
+        Medico medico = medicoRepository.getReferenceById(id);
+        medico.desactivarMedico();
     }
 }
